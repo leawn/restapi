@@ -16,12 +16,15 @@ const userSchema = new Schema({
     },
     status: {
         type: String,
-        default: 'I am new!'
+        default: 'I am new!',
+        required: true
     },
-    posts: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Post'
-    }]
+    posts: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Post'
+        }
+    ]
 });
 
 module.exports = mongoose.model('User', userSchema);

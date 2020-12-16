@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const feedRoutes = require('./routes/feed');
 const authRoutes = require('./routes/auth');
+const statusRoutes = require('./routes/status');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const multer = require('multer');
@@ -28,7 +29,7 @@ const fileFilter = (req, file, cb) => {
     }
 }
 
-//app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json()); // application/json
 app.use(multer({
     storage: fileStorage,
@@ -47,6 +48,7 @@ app.use((req, res, next) => {
 
 app.use('/feed', feedRoutes);
 app.use('/auth', authRoutes);
+app.use('/status', statusRoutes);
 app.use((error, req, res, next) => {
     console.log(error);
     const status = error.statusCode || 500;
